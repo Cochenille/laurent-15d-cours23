@@ -8,7 +8,7 @@ var PersonneModel = require('../models/personneModel.js').Personne;
 //ORM Mongoose
 var mongoose = require('mongoose');
 // Connexion à MongoDB avec Mongoose
-mongoose.connect('mongodb+srv://test:test@cluster0.e3yt3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority/HATEOAS-demo', {
+mongoose.connect('mongodb+srv://test:test@cluster0.e3yt3.mongodb.net/HATOEAS-demo', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     poolSize: 10
