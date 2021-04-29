@@ -1,4 +1,5 @@
 'use strict';
+const PORT = process.env.PORT || 8090;
 var express = require('express');
 var app = express();
 var hateoasLinker = require('express-hateoas-links');
@@ -22,6 +23,6 @@ app.all('*', function (req, res) {
 });
 
 // Démarrage du serveur.
-app.listen(8090, function () {
+app.listen(PORT, function () {
     console.log('Serveur sur port ' + this.address().port);
 });

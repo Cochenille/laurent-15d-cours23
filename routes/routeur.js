@@ -2,13 +2,13 @@
 
 var express = require('express');
 var routeur = express.Router();
-var url_base = "http://localhost:8090";
+var url_base = "https://laurent-15d-cours-23.herokuapp.com";
 //Importation de modèle Personne
 var PersonneModel = require('../models/personneModel.js').Personne;
 //ORM Mongoose
 var mongoose = require('mongoose');
 // Connexion à MongoDB avec Mongoose
-mongoose.connect('mongodb://localhost:27017/HATEOAS-demo', {
+mongoose.connect('mongodb+srv://test:test@cluster0.e3yt3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority/HATEOAS-demo', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     poolSize: 10
@@ -24,8 +24,8 @@ routeur.route('/personnes/:personne_id').get(function(req, res){
             if (personne){
             //en passant le tableau de links en paramètre, express-hateoas-links s'occupera de créer le champs 'Links' dans la réponse
                 res.json(personne,[
-                    { rel: "self", method: "GET", href: "http://localhost:8090/personnes/"+personne._id.toString() },
-                    { rel: "delete", method: "DELETE", title: "Create Personne", href: "http://localhost:8090/personnes/"+personne._id.toString()}
+                    { rel: "self", method: "GET", href: url_base+"/personnes/"+personne._id.toString() },
+                    { rel: "delete", method: "DELETE", title: "Create Personne", href: url_base+"/personnes/"+personne._id.toString()}
                     ]);
             }
             else res.status(404).end();
@@ -44,8 +44,8 @@ routeur.get('/personnes', function(req, res){
             personnes.forEach(personne => {
                 //C'Est ici qu'on inclut les hyperliens que l'on souhaite joindre à chaque élément de la collection
                 var links =[
-                    {rel: "self",method: "GET",href: "http://localhost:8090/personnes/"+personne._id.toString()},
-                    {rel: "delete",method: "DELETE",href: "http://localhost:8090/personnes/"+personne._id.toString()}
+                    {rel: "self",method: "GET",href: url_base+"/personnes/"+personne._id.toString()},
+                    {rel: "delete",method: "DELETE",href: url_base+"/personnes/"+personne._id.toString()}
                 ];
                 var personToJson = personne.toJSON();
                 var personnesAvecLink = {
